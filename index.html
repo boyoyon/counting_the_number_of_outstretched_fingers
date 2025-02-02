@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <title>伸ばした指の本数を数える</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+        </style>
+    </head>
+    <body>
+        <h1><center>伸ばした指の本数を数える</center></h1>
+        <h2>なにものか？</h2>
+        <p>
+            Mediapipe Handを使って、伸ばした指の本数を数えるプログラムです。<br>
+            <br>
+            <img src="images/in_out.gif"><br>
+            <br>
+            Mediapipe Hand の Landmark<br>
+            <img src="images/fig1.png"><br>
+            <br>
+            ・TIP：指先<br>
+            ・DIP(distal interphalangeal joint)：指の第一関節<br>
+            ・PIP(proximal interphalangeal joint)：指の第二関節<br>
+            ・MCP(metacarpophalangeal joint)：指の第三関節(指の付け根、根本）<br>
+            ・CMC(carpometacarpal joint)：指の第四関節<br>
+            <br>
+            なぜか、親指だけ、DIPとPIPに分かれておらずIP。(そのため)第四関節(CMC)が必要になる。<br>
+            名称はそういうものとして、各指に対して<br>
+            ・手首～指のつけ根ベクトル<br>
+            ・指のつけ根～指先ベクトル<br>
+            の角度を求め、閾値未満か以上かで、伸ばしている/折りたたんでいる、を判定する。<br>
+            <br>
+　　　　　　<img src="images/fig2.png"><br>
+
+        </p>
+        <h2>環境構築方法</h2>
+        <p>
+            pip install mediapipe opencv-python
+        </p>
+        <h2>使い方</h2>
+        <p>
+            python src\count_the_number_of_outstretched_fingers.py<br>
+            <br>
+            USBカメラが USB ch0以外に接続されている場合は、<br>
+            cap = cv2.VideoCapture(0)<br>
+            の 0 をチャネル番号に変更してください。<br>
+            <br>
+            色々課題がありますが対応しておりません。<br>
+            ・mediapipeを更新したら警告がいくつか表示される。<br>
+            ・遷移中にばたつかないように、検出回数でフィルターを掛けるなどが必要かもしれない。<br>
+            ・手首～指先が欠けると正常にカウントできない。<br>
+            等々<br>
+        </p>
+    </body>
+</html>
